@@ -1,0 +1,11 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { Markdown } from 'astro/components';
+const { slug } = Astro.params;
+const post = await Astro.glob('../../content/*.md');
+const entry = post.find(p => p.url.includes(slug));
+const { Content } = await entry.render();
+---
+<BlogLayout title={entry.frontmatter.title}>
+  <Content />
+</BlogLayout>
